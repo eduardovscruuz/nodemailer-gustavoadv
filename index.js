@@ -9,7 +9,7 @@ const port = process.env.PORT || 3000;
 
 
 app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', 'https://advogadogustavogouvea.com.br');
+  res.header('Access-Control-Allow-Origin', 'https://advogadogustavogouvea.com.br', 'https://www.advogadogustavogouvea.com.br');
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
   next();
 });
