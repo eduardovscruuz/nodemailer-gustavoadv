@@ -8,11 +8,21 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', 'https://advogadogustavogouvea.com.br', 'https://www.advogadogustavogouvea.com.br');
-  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-  next();
-});
+const cors = require('cors');
+
+const allowedOrigins = ['https://advogadogustavogouvea.com.br', 'https://www.advogadogustavogouvea.com.br'];
+
+app.use(cors({
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  methods: 'GET,POST,OPTIONS',
+  allowedHeaders: 'Origin, X-Requested-With, Content-Type, Accept'
+}));
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
